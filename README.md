@@ -1,78 +1,179 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Library Management System
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+> An automated system to manage a public library. Admin panel for librarians to control and manage the system easily through an interactive interface.
 
-## About Laravel
+ + [Development](#development)
+ + [Contribute](#contribute)
+ + [Setup](#setup)
+ + [Features](#features)
+ + [Screenshots](meta/README.md)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Development
+The backend of the system is developed on **[Laravel 6.20 PHP MVC Framework](http://laravel.com/)** and requires PHP 7.25 with the appropriate MCrypt extension.
+The front end is built on **[Argon Dashboard 2 Laravel Template](https://www.creative-tim.com/product/argon-dashboard-laravel)** ([Demo](https://www.creative-tim.com/live/argon-dashboard-laravel)) which is built on [Bootstrap v5](https://getbootstrap.com/docs/5.3/) using [jQuery](https://blog.jquery.com/2013/07/03/jquery-1-10-2-and-2-0-3-released/) and [CountUp JS](https://inorganik.github.io/countUp.js/)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Contribute
++ For reporting bug about an incorrect file not being processed, open a new issue.
++ PRs are always welcome to improve exisiting system.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Setup
+With the above notes in mind, Windows setup is not too tricky:
 
-## Learning Laravel
+* Open git shell;
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* `cd C:/path/to/xampp/htdocs`;
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* `git clone https://github.com/thanhdat091201/Laravel-OLMS.git`;
 
-## Laravel Sponsors
+* `cd Laravel-OLMS`;
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+* `composer install --no-dev --no-interaction --prefer-dist`;
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+* `cp .env.example .env`;
 
-## Contributing
+* `php artisan key:generate`;
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Create a table for the app in phpmyadmin (or however you prefer);
 
-## Code of Conduct
+* `php artisan migrate`;
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* `php artisan db:seed`;
 
-## Security Vulnerabilities
+* `php artisan serve`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Access the application at http://localhost:8000 (if using the built-in web server) or the appropriate URL for your virtual host setup.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Features
+ + Librarians can be given their authorized login ID and password without which the system can not be accessed.
+ + Students can only access limited features, i.e., public access level features which include **searching a book** and **student registration form**.
+ + After logging in librarians can search for a specific book, book issue or student from the home panel.
+ + Librarians need to make an entry for new books. To automate the process they simply need to enter the number of issues, then the Issue ID for each book issue is generated automatically.
+ + Another responsibility of a librarian is to approve students in situations where approval is needed, i.e. where documents are to be verified or some manual work. Librarians have a panel to simply approve / reject students and to view all approved students. The librarian ID is stored alongside each approved/rejected student to keep track.
+ + The most important function of any library is to issue and return books. This system includes a panel to view all outstanding logs and a super simple panel to issue and return books for all librarians.
+
+## Documentation
+The documentation for the Material Dashboard Laravel is hosted at our [website](https://www.creative-tim.com/product/argon-dashboard-laravel/docs/bootstrap/quick-start/argon-dashboard/index.html).
+
+### Login
+If you are not logged in you can only access this page or the Sign Up page. The default url takes you to the login page where you use the default credentials **admin@argon.com** with the password **secret**. Logging in is possible only with already existing credentials. For this to work you should have run the migrations. 
+
+The `App/Http/Controllers/Logincontroller.php` handles the logging in of an existing user.
+
+```
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
+    }
+```
+
+### Register
+You can register as a user by filling in the name, email and password for your account. You can do this by accessing the sign up page from the "**Sign Up**" button in the top navbar or by clicking the "**Sign Up**" button from the bottom of the log in form.. Another simple way is adding **/register** in the url.
+
+The `App/Http/Controllers/RegisterController.php` handles the registration of a new user.
+
+```
+    public function store()
+    {
+        $attributes = request()->validate([
+            'username' => 'required|max:255|min:2',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|min:5|max:255',
+            'terms' => 'required'
+        ]);
+        $user = User::create($attributes);
+        auth()->login($user);
+
+        return redirect('/dashboard');
+    }
+```
+
+### Forgot Password
+If a user forgets the account's password it is possible to reset the password. For this the user should click on the "**here**" under the login form.
+
+The `App/Http/Controllers/ResetPasswordController.php ` takes care of sending an email to the user where he can reset the password afterwards.
+
+```
+    public function send(Request $request)
+    {
+        $email = $request->validate([
+            'email' => ['required']
+        ]);
+        $user = User::where('email', $email)->first();
+
+        if ($user) {
+            $this->notify(new ForgotPassword($user->id));
+            return back()->with('succes', 'An email was send to your email address');
+        }
+    }
+```
+
+### Reset Password
+The user who forgot the password gets an email on the account's email address. The user can access the reset password page by clicking the button found in the email. The link for resetting the password is available for 12 hours. The user must add the email, the password and confirm the password for his password to be updated.
+
+The `App/Http/Controllers/ChangePasswordController.php` helps the user reset the password.
+
+```
+    public function update(Request $request)
+    {
+        $attributes = $request->validate([
+            'email' => ['required'],
+            'password' => ['required', 'min:5'],
+            'confirm-password' => ['same:password']
+        ]);
+
+        $existingUser = User::where('email', $attributes['email'])->first();
+        if ($existingUser) {
+            $existingUser->update([
+                'password' => $attributes['password']
+            ]);
+            return redirect('login');
+        } else {
+            return back()->with('error', 'Your email does not match the email who requested the password change');
+        }
+    }
+```
+
+### User Profile
+The profile can be accessed by a logged in user by clicking "**Profile**" from the sidebar or adding **/profile** in the url. The user can add information like phone number, location, description or change the name and email.
+
+The `App/Http/Controllers/UserProfileController.php ` handles the user's profile information.
+
+```
+        auth()->user()->update([
+            'username' => $request->get('username'),
+            'firstname' => $request->get('firstname'),
+            'lastname' => $request->get('lastname'),
+            'email' => config('app.is_demo') ? auth()->user()->email : $request->get('email') ,
+            'address' => $request->get('address'),
+            'city' => $request->get('city'),
+            'country' => $request->get('country'),
+            'postal' => $request->get('postal'),
+            'about' => $request->get('about')
+        ]);
+    
+}
+```
+
+### Dashboard
+You can access the dashboard either by using the "**Dashboard**" link in the left sidebar or by adding **/dashboard** in the url after logging in. 
+
+### Social Media
+
+Facebook: <https://www.facebook.com/notheregular/>
+
+
+
