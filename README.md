@@ -16,6 +16,11 @@ The front end is built on **[Argon Dashboard 2 Laravel Template](https://www.cre
 + For reporting bug about an incorrect file not being processed, open a new issue.
 + PRs are always welcome to improve exisiting system.
 
+## Demo
+| Register | Login | Dashboard |
+| --- | --- | ---  |
+| [<img src="src/argon-stubs/resources/argon/screens/register.png" width="322" />](https://argon-dashboard-laravel.creative-tim.com/register) | [<img src="src/argon-stubs/resources/argon/screens/login.png" width="322" />](https://argon-dashboard-laravel.creative-tim.com/login)  | [<img src="src/argon-stubs/resources/argon/screens/dashboard.png" width="322" />](https://argon-dashboard-laravel.creative-tim.com/dashboard)
+
 ## Setup
 With the above notes in mind, Windows setup is not too tricky:
 
@@ -56,7 +61,7 @@ Access the application at http://localhost:8000 (if using the built-in web serve
 The documentation for the Material Dashboard Laravel is hosted at our [website](https://www.creative-tim.com/product/argon-dashboard-laravel/docs/bootstrap/quick-start/argon-dashboard/index.html).
 
 ### Login
-If you are not logged in you can only access this page or the Sign Up page. The default url takes you to the login page where you use the default credentials **admin@argon.com** with the password **secret**. Logging in is possible only with already existing credentials. For this to work you should have run the migrations. 
+If you are not logged in you can only access this page or the Sign Up page. The default url takes you to the login page where you use the default credentials **admin123@gmail.com** with the password **admin**. Logging in is possible only with already existing credentials. For this to work you should have run the migrations. 
 
 The `App/Http/Controllers/Logincontroller.php` handles the logging in of an existing user.
 
