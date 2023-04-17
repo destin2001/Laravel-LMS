@@ -3,6 +3,8 @@
 	<td><%= obj.title %></td>
 	<td><%= obj.author %></td>
 	<td><%= obj.description %></td>
+	<td><%= obj.publisher %></td>
+	<td><%= obj.publish_year %></td>
 	<td><%= obj.category %></td>
 	<td><%= obj.avaliability %></td>
 </tr>

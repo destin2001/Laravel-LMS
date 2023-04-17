@@ -6,12 +6,12 @@
 </div>
 <div class="container-fluid py-4">
     <div class="row mt-4">
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <div class="card">
                 <div class="card-header pb-0 p-3">
                     <h6 class="mb-0">All Books Category</h6>
                 </div>
-                <div class="card-body p-3">
+                <div class="card-body">
                     <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
@@ -32,20 +32,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-8 mb-lg-0 mb-4">
+        <div class="col-lg-7 mb-lg-0 mb-4">
             <div class="card ">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
                         <h6 class="mb-2">Add Books Category</hh6>
                     </div>
-
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal row-fluid">
                         <div class="row">
                             <div class="col-md-12 tab-pane">
                                 <div class="form-group">
-                                    <input id="category" class="form-control" data-form-field="category" type="text" placeholder="Enter the category of the book here...">
+                                    <input id="category-input" class="form-control" data-form-field="category" type="text" placeholder="Enter the category of the book here...">
                                     <input type="hidden" data-form-field="token" value="{{ csrf_token() }}">
                                 </div>
                             </div>
@@ -69,6 +68,7 @@
 @endsection
 
 @push('js')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{{asset('static/scripts/jquery-1.9.1.min.js') }}" type="text/javascript"></script>
 <script src="{{asset('static/scripts/jquery-ui-1.10.1.custom.min.js') }}" type="text/javascript"></script>
 <script src="{{asset('static/scripts/underscore-min.js') }}" type="text/javascript"></script>

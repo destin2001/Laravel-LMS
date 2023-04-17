@@ -227,29 +227,27 @@ class StudentController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy(Request $request, $id)
+	public function destroy($resource, $id)
 	{
-		// dd($request->all());
-		if ($request->category) {
-			
-			$student = StudentCategories::find($id);
-			$student->delete();
-			if (!$student) {
+		if ($resource == 'category') {
+			$category = StudentCategories::find($id);
+			$category->delete();
+			if (!$category) {
 				return "Student Category Fail to Delete!.";
-			}else {
+			} else {
 				return redirect(route('settings'));
 			}
-		}elseif ($request->branch) {
-			
+		} elseif ($resource == 'branch') {
 			$branch = Branch::find($id);
 			$branch->delete();
 			if (!$branch) {
 				return "School Branch Fail to Delete!.";
-			}else {
+			} else {
 				return redirect(route('settings'));
 			}
 		}
 	}
+
 
 
 	public function renderStudents(){
@@ -268,7 +266,7 @@ class StudentController extends Controller
 
 	public function getRegistration(){
 		$db_control = new HomeController;
-		return view('public.registration')
+		return view('auth.registration')
 			->with('branch_list', $db_control->branch_list)
 			->with('student_categories_list', $db_control->student_categories_list);
 	}
@@ -315,9 +313,12 @@ class StudentController extends Controller
 		$branches = Branch::all();
 		$student_category = StudentCategories::all();
 
-		return view('pages.addsettings')
-		->with('branches', $branches)
-		->with('student_category', $student_category);
+		$data = [
+			'branches' => $branches,
+			'student_categories' => $student_category,
+		];
+
+		return $data;
 	}
 
 	public function StoreSetting(Request $request)
@@ -344,7 +345,10 @@ class StudentController extends Controller
 				// return back();
 			}
 		}
+	}
 
-		
+	public function renderSetting()
+	{
+		return view('pages.addsettings');
 	}
 }

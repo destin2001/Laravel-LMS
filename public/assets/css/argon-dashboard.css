@@ -4547,6 +4547,8 @@ textarea.form-control-lg {
 .navbar-nav {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
@@ -7650,6 +7652,10 @@ textarea.form-control-lg {
 
 .border-5 {
   border-width: 5px !important;
+}
+
+.w-125 {
+  width: 215px !important;
 }
 
 .w-0 {
@@ -20833,6 +20839,28 @@ hr.horizontal.gray-light {
           animation-duration: 30s;
 }
 
+.shake {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
 @-webkit-keyframes move-forever {
   0% {
     transform: translate3d(-90px, 0, 0);
@@ -24880,3 +24908,19 @@ pre[class*=language-] {
     overflow: auto !important;
   }
 }
+
+.nav-animate {
+  color: #111;
+  display: inline-block;
+  transition-duration: 0.3s;
+  transition-property: transform;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+.nav-animate:hover {
+  transform: scale(1.1);
+}
+
+

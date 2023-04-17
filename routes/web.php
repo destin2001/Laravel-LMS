@@ -16,7 +16,6 @@ Route::get('/', function () {
 });
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
@@ -25,6 +24,7 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LogController;
+use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\MockObject\Builder\Stub;
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
@@ -36,6 +36,10 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
 	Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
 	Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
+
+	Route::get('/student-registration', [StudentController::class, 'getRegistration'])->middleware('guest')->name('student-registration');
+	Route::post('/student-registration', [StudentController::class, 'postRegistration'])->middleware('guest')->name('student-registration-post');
+	Route::get('/book', [BooksController::class, 'searchBook'])->middleware('guest')->name('book');
 	// Main books Controlller left public so that it could be used without logging in too
 	Route::resource('/books', 'BooksController');
 	// Route::resource('/books', BooksController::class)->except(['index']);
@@ -44,8 +48,10 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 Route::group(['middleware' => 'auth'], function () {
 	// Render Add Books panel
 	Route::get('/add-books', [BooksController::class, 'renderAddBooks'])->name('add-books');
+	Route::post('/add-book', [BooksController::class, 'store'])->name('add-books.store');
 	Route::get('/bookcategory', [BooksController::class, 'renderAddBookCategory'])->name('bookcategory');
 	Route::post('/bookcategory', [BooksController::class, 'BookCategoryStore'])->name('bookcategory.store');
+	Route::post('/bookcategorydelete/{id}', [BooksController::class, 'destroyCategories'])->name('bookcategory.delete');
 	Route::get('/book-categories', [BooksController::class, 'bookCategories'])->name('book-categories');
 
 	// Render All Books panel
@@ -57,8 +63,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Render students approval panel
 	Route::get('/students-for-approval', [StudentController::class, 'renderApprovalStudents'])->name('students-for-approval');
-	Route::get('/settings', [StudentController::class, 'Setting'])->name('settings');
+	Route::get('/settings', [StudentController::class, 'renderSetting'])->name('settings');
+	Route::get('/setting-all', [StudentController::class, 'Setting'])->name('settings-all');
 	Route::post('/setting', [StudentController::class, 'StoreSetting'])->name('settings.store');
+	Route::post('/student/{resource}/{id}', [StudentController::class, 'destroy'])->where('resource', '(category|branch)');
+
 
 	// Main students Controlller resource
 	Route::resource('/student', 'StudentController');

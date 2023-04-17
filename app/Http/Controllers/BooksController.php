@@ -90,7 +90,9 @@ class BooksController extends Controller
 			'author'		=> $books['author'],
 			'description' 	=> $books['description'],
 			'category_id'	=> $books['category_id'],
-			'added_by'		=> $user_id
+			'added_by'		=> $user_id,
+			'publisher'		=> $books['publisher'],
+			'publish_year'	=> $books['publish_year'],
 		]);
 		// dd($book_title);
 		$newId = $book_title->book_id;
@@ -126,6 +128,22 @@ class BooksController extends Controller
 		$bookCategories = BookCategories::all();
 
 		return $bookCategories;
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 */
+	public function destroyCategories($id)
+	{
+		$category = BookCategories::find($id);
+		if (!$category) {
+			return "Book Category Fail to Delete!.";
+		}else {
+			$category->delete();
+			return redirect(route('bookcategory'));
+		}	
 	}
 
 	public function BookCategoryStore(Request $request)
@@ -260,7 +278,7 @@ class BooksController extends Controller
 		//
 	}
 
-	public function renderAddBookCategory(Type $var = null)
+	public function renderAddBookCategory()
 	{
 		return view('pages.addbookcategory');
 	}
@@ -314,7 +332,7 @@ class BooksController extends Controller
 	{
 		$db_control = new HomeController();
 
-		return view('public.book-search')
+		return view('auth.book-search')
 			->with('categories_list', $db_control->categories_list);
 	}
 }

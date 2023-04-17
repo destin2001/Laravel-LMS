@@ -45,47 +45,10 @@
                                         Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($branches as $branch)
-                                <tr>
-                                    <td>{{ $branch->id }}</td>
-                                    <td>{{ $branch->branch }}</td>
-                                    <td>
-                                        <div class="btn btn-group">
-                                            <a href=""><i class="icon-edit"></i></a>
-
-                                            <a href="#" data-toggle="modal" data-target="#deleteBranch{{ $branch->id }}"><i class="icon-trash"></i></a>
-
-                                        </div>
-                                    </td>
+                            <tbody id="all-branch">
+                                <tr class="text-center">
+                                    <td colspan="99"> <i class="icon-spinner icon-spin">Loading...</i></td>
                                 </tr>
-                                <!-- Modal -->
-                                <div class="modal fade" id="deleteBranch{{ $branch->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header ">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                <h5 class="modal-title" id="exampleModalLabel">Delete Branch</h5>
-
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="{{ route('student.destroy', $branch->id) }}" method="Post">
-                                                    @csrf
-                                                    @method('Delete')
-                                                    <p>Are you sure you want to delete this ({{ $branch->branch }}) Branch ? </p>
-                                                    <input type="hidden" name="branch" id="branch" value="{{ $branch->branch }}">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -141,45 +104,10 @@
                                         Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($student_category as $student_category)
-                                <tr>
-                                    <td>{{ $student_category->cat_id }}</td>
-                                    <td>{{ $student_category->category }}</td>
-                                    <td>{{ $student_category->max_allowed }}</td>
-                                    <td>
-                                        <div class="btn btn-group">
-                                            <a href=""><i class="icon-edit"></i></a>
-                                            <a href="#" data-toggle="modal" data-target="#deleteCategory{{ $student_category->cat_id }}"><i class="icon-trash"></i></a>
-                                        </div>
-                                    </td>
+                            <tbody id="all-student-category">
+                                <tr class="text-center">
+                                    <td colspan="99"> <i class="icon-spinner icon-spin">Loading...</i></td>
                                 </tr>
-                                <!-- Modal -->
-                                <div class="modal fade" id="deleteCategory{{ $student_category->cat_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header ">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                <h5 class="modal-title" id="exampleModalLabel">Delete Student Category</h5>
-
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="{{ route('student.destroy', $student_category->cat_id) }}" method="Post">
-                                                    @csrf
-                                                    @method('Delete')
-                                                    <p>Are you sure you want to delete this ({{ $student_category->category }}) Student Category ? </p>
-                                                    <input type="hidden" name="category" id="category" value="{{ $student_category->category }}">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -192,5 +120,16 @@
 @endsection
 
 @push('js')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{asset('static/scripts/jquery-1.9.1.min.js') }}" type="text/javascript"></script>
+<script src="{{asset('static/scripts/jquery-ui-1.10.1.custom.min.js') }}" type="text/javascript"></script>
+<script src="{{asset('static/scripts/underscore-min.js') }}" type="text/javascript"></script>
+<script src="{{asset('static/custom/js/script.common.js') }}" type="text/javascript"></script>
 <script type="text/javascript" src="{{ asset('static/custom/js/script.settings.js') }}"></script>
+<script type="text/template" id="allbranch_show">
+    @include('under_source.allbranch_show')
+</script>
+<script type="text/template" id="allstudentcategory_show">
+    @include('under_source.allstudentcategory_show')
+</script>
 @endpush

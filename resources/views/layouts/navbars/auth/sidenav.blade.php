@@ -114,9 +114,11 @@
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
+            <br>
+            <li class="nav-item">
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
+                class="btn btn-primary btn-sm mb-3 mx-3 w-125" target="_blank" type="button">Log Out</a>
+            </li>
         </ul>
-    </div>
-    <div class="sidenav-footer mb-3 mx-3 min-mw-220">
-        <a class="btn btn-primary btn-sm mb-0 w-100" href="https://www.creative-tim.com/product/argon-dashboard-pro-laravel" target="_blank" type="button">Log Out</a>
     </div>
 </aside>

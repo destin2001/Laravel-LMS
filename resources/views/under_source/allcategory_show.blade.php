@@ -8,6 +8,9 @@
         <span class="text-secondary text-sm font-weight-bold"><%= obj.category %></span>
     </td>
     <td class="align-middle text-start">
-        <a class="btn-danger btn-sm category-status" data-status="0">Delete</a>
+        <form class="form-horizontal row-fluid" id="delete" data-csrf-token="{{ csrf_token() }}">
+            <input type="hidden" name="category_id" value="<%= obj.id %>">
+            <button type="submit" class="btn bg-gradient-danger btn-sm category-status my-sm-1" id="delete-category">Delete</button>
+        </form>
     </td>
 </tr>

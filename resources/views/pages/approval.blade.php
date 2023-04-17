@@ -39,18 +39,12 @@
                                     All Years
                                 </button>
                                 <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">All Years</a></li>
-                                    <li><a class="dropdown-item" href="#">2019</a></li>
-                                    <li><a class="dropdown-item" href="#">2020</a></li>
-                                    <li><a class="dropdown-item" href="#">2021</a></li>
-                                    <li><a class="dropdown-item" href="#">2022</a></li>
-                                    <li><a class="dropdown-item" href="#">2023</a></li>
-                                    <li><a class="dropdown-item" href="#">2024</a></li>
-                                    <li><a class="dropdown-item" href="#">2025</a></li>
-                                    <li><a class="dropdown-item" href="#">2026</a></li>
-                                    <li><a class="dropdown-item" href="#">2027</a></li>
-                                    <li><a class="dropdown-item" href="#">2028</a></li>
-                                    <li><a class="dropdown-item" href="#">2029</a></li>
+                                    @php
+                                        $current_year = date('Y');
+                                        $startYear = date('Y') - 10;
+                                        @endphp
+                                        @for ($i = $startYear; $i <= $current_year; $i++)<li><a id="year_select" class="dropdown-item" data-value="{{ $i }}" href="#">{{ $i }}</a></li>
+                                    @endfor
                                 </ul>
                             </div>
                         </div>

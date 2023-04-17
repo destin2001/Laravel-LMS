@@ -204,8 +204,7 @@
                         <div class="col-md-12 tab-pane">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Name or author of the book</label>
-                                <input class="form-control" type="text" name="about"
-                                            value="{{ old('about', auth()->user()->about) }}">
+                                <input class="form-control" type="text" name="about" value="{{ old('about', auth()->user()->about) }}">
                             </div>
                         </div>
                     </div>
@@ -213,8 +212,7 @@
                         <div class="col-md-12 tab-pane">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Enter Book ID</label>
-                                <input class="form-control" type="text" name="about"
-                                            value="{{ old('about', auth()->user()->about) }}">
+                                <input class="form-control" type="text" name="about" value="{{ old('about', auth()->user()->about) }}">
                             </div>
                         </div>
                     </div>
@@ -222,8 +220,7 @@
                         <div class="col-md-12 tab-pane">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Enter Student ID</label>
-                                <input class="form-control" type="text" name="about"
-                                            value="{{ old('about', auth()->user()->about) }}">
+                                <input class="form-control" type="text" name="about" value="{{ old('about', auth()->user()->about) }}">
                             </div>
                         </div>
                     </div>
@@ -248,7 +245,9 @@
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
+                                <a class="nav-link {{ str_contains(request()->url(), 'bookcategory') == true ? 'active' : '' }}" href="{{ route('bookcategory') }}">
+                                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
+                                </a>
                             </div>
                         </li>
                         <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
@@ -262,7 +261,9 @@
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
+                                <a class="nav-link {{ str_contains(request()->url(), 'add-books') == true ? 'active' : '' }}" href="{{ route('add-books') }}">
+                                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
+                                </a>
                             </div>
                         </li>
                         <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
@@ -277,7 +278,9 @@
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
+                                <a class="nav-link {{ Route::currentRouteName() == 'issue-return' ? 'active' : '' }}" href="{{ route('issue-return') }}">
+                                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
+                                </a>
                             </div>
                         </li>
                     </ul>

@@ -2,7 +2,7 @@ function loadResults(string){
     var url = "/books/" + string;
 
     var table = $('#book-results'),
-        table_parent_row = table.parents('.row'),
+        table_parent_row = table.parents('.card-body'),
         default_tpl = _.template($('#search_book').html());
 
 
@@ -39,7 +39,7 @@ function loadResults(string){
 
 $(document).ready(function(){   
     $("#search_book_button").click(function() {
-        var search_query = $(this).parents('form').find('textarea').val();
+        var search_query = $(this).parents('form').find('input').val();
 
         if(search_query != '')
             loadResults(search_query);

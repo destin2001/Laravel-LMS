@@ -17,60 +17,82 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p class="text-uppercase text-sm">Book Information</p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Title of book</label>
-                                <input class="form-control" type="text" id="title" data-form-field="title" placeholder="Enter the title of the book here...">
-                                <input type="hidden" data-form-field="token" value="{{ csrf_token() }}">
-                                <input type="hidden" data-form-field="auth_user" value="{{ auth()->user()->id }}">
+                    <form class="form-horizontal row-fluid">
+                        <p class="text-uppercase text-sm">Book Information</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Title of book</label>
+                                    <input class="form-control" type="text" id="title" data-form-field="title" placeholder="Enter the title of the book here...">
+                                    <input type="hidden" data-form-field="token" value="{{ csrf_token() }}">
+                                    <input type="hidden" data-form-field="auth_user" value="{{ auth()->user()->id }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Author name</label>
+                                    <input class="form-control" type="text" id="author" data-form-field="author" placeholder="Enter the name of author for the book here...">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Publisher</label>
+                                    <input class="form-control" type="text" id="publisher" data-form-field="publisher" placeholder="Enter the publisher of the book here...">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Published Year</label>
+                                    <select tabindex="1" class="form-control" name="choices-button" data-form-field="publish_year" id="choices-button publish_year" placeholder="Departure" data-placeholder="Select publish year..">
+                                        <!-- <option value="0">All Years</option> -->
+                                        @php
+                                        $current_year = date('Y');
+                                        $startYear = date('Y') - 10;
+                                        @endphp
+                                        @for ($i = $startYear; $i <= $current_year; $i++) <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Description of Book</label>
+                                    <textarea class="form-control" id="description" data-form-field="description" rows="5" placeholder="Enter few lines about the book here" rows="3"></textarea>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Author name</label>
-                                <input class="form-control" type="text" id="author" data-form-field="author" placeholder="Enter the name of author for the book here...">
+                        <hr class="horizontal dark">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Category</label>
+                                    <select tabindex="1" class="form-control" name="choices-button" data-form-field="category" id="choices-button category" placeholder="Departure" data-placeholder="Select category..">
+                                        @foreach($categories_list as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Number of issues</label>
+                                    <input class="form-control" id="number" type="number" data-form-field="number" placeholder="How many issues are there?">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Description of Book</label>
-                                <textarea class="form-control" id="description" data-form-field="description" rows="5" placeholder="Enter few lines about the book here" rows="3"></textarea>
-                            </div>
+                        </br>
+                        <div class="row justify-content-lg-end px-3">
+                            <button type="button" class="btn btn-success mw-140px" id="addbooks">
+                                <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+                                <span class="btn-inner--text">Add Books</span>
+                            </button>
                         </div>
-                    </div>
-                    <hr class="horizontal dark">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Category</label>
-                                <select tabindex="1" class="form-control" name="choices-button" id="choices-button category" placeholder="Departure" data-placeholder="Select category..">
-                                    @foreach($categories_list as $category)
-                                    <option value="{{ $category->id }}">{{ $category->category }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Number of issues</label>
-                                <input class="form-control" id="number" type="number" data-form-field="number" placeholder="How many issues are there?">
-                            </div>
-                        </div>
-                    </div>
-                    </br>
-                    <div class="row justify-content-lg-end px-3">
-                        <button type="button" class="btn btn-success mw-140px" id="addbooks">
-                            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
-                            <span class="btn-inner--text">Add Books</span>
-                        </button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-        <div class="card card-carousel overflow-hidden h-100 p-0">
+            <div class="card card-carousel overflow-hidden h-100 p-0">
                 <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
                     <div class="carousel-inner border-radius-lg h-100">
                         <div class="carousel-item h-100 active" style="background-image: url('./img/carousel-1.jpg');
@@ -120,3 +142,13 @@
     @include('layouts.footers.auth.footer')
 </div>
 @endsection
+
+@push('js')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{asset('static/scripts/jquery-1.9.1.min.js') }}" type="text/javascript"></script>
+<script src="{{asset('static/scripts/jquery-ui-1.10.1.custom.min.js') }}" type="text/javascript"></script>
+<script src="{{asset('static/scripts/underscore-min.js') }}" type="text/javascript"></script>
+<script src="{{asset('static/custom/js/script.common.js') }}" type="text/javascript"></script>
+
+<script type="text/javascript" src="{{ asset('static/custom/js/script.addbook.js') }}"></script>
+@endpush

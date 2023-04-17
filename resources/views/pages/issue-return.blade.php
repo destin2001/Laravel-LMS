@@ -62,30 +62,49 @@
             <input type="hidden" id="_token" data-form-field="token" value="{{ csrf_token() }}">
         </div>
         <div class="col-md-4">
-            <div class="card card-profile ">
-                <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
-                    <a href="javascript:;" class="d-block">
-                        <img src="./assets/img/kit/pro/anastasia.jpg" class="img-fluid border-radius-lg">
-                    </a>
-                </div>
-
-                <div class="card-body pt-2">
-                    <span class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2">House</span>
-                    <a href="javascript:;" class="card-title h5 d-block text-darker">
-                        Shared Coworking
-                    </a>
-                    <p class="card-description mb-4">
-                        Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons.
-                    </p>
-                    <div class="author align-items-center">
-                        <img src="./assets/img/kit/pro/team-2.jpg" alt="..." class="avatar shadow">
-                        <div class="name ps-3">
-                            <span>Mathew Glock</span>
-                            <div class="stats">
-                                <small>Posted on 28 February</small>
+        <div class="card card-carousel overflow-hidden h-100 p-0">
+                <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
+                    <div class="carousel-inner border-radius-lg h-100">
+                        <div class="carousel-item h-100 active" style="background-image: url('./img/carousel-1.jpg');
+            background-size: cover;">
+                            <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                                <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
+                                    <i class="ni ni-camera-compact text-dark opacity-10"></i>
+                                </div>
+                                <h5 class="text-white mb-1">Get manage your library</h5>’
+                                <p>There’s nothing I really wanted to do in life that I wasn’t able to get good at.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item h-100" style="background-image: url('./img/carousel-2.jpg');
+            background-size: cover;">
+                            <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                                <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
+                                    <i class="ni ni-bulb-61 text-dark opacity-10"></i>
+                                </div>
+                                <h5 class="text-white mb-1">Faster way to create web pages</h5>
+                                <p>That’s my skill. I’m not really specifically talented at anything except for the
+                                    ability to learn.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item h-100" style="background-image: url('./img/carousel-3.jpg');
+            background-size: cover;">
+                            <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                                <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
+                                    <i class="ni ni-trophy text-dark opacity-10"></i>
+                                </div>
+                                <h5 class="text-white mb-1">Share with us your design tips!</h5>
+                                <p>Don’t be afraid to be wrong because you can’t learn anything from a compliment.</p>
                             </div>
                         </div>
                     </div>
+                    <button class="carousel-control-prev w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
         </div>

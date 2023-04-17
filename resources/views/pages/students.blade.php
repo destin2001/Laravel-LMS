@@ -16,8 +16,9 @@
                                 </button>
                                 <ul class="dropdown-menu w-100 text-start" aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="#">All Branches</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    @foreach($branch_list as $branch)
+                                    <li><a class="dropdown-item" id="branch_select" href="#" data-value="{{ $branch->id }}">{{ $branch->branch }}</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -28,8 +29,9 @@
                                 </button>
                                 <ul class="dropdown-menu w-100 text-start" aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="#">All Categories</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    @foreach($student_categories_list as $student_category)
+                                    <li><a class="dropdown-item" id="category_select" href="#" data-value="{{ $student_category->cat_id }}">{{ $student_category->category }}</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -39,18 +41,12 @@
                                     All Years
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">All Years</a></li>
-                                    <li><a class="dropdown-item" href="#">2019</a></li>
-                                    <li><a class="dropdown-item" href="#">2020</a></li>
-                                    <li><a class="dropdown-item" href="#">2021</a></li>
-                                    <li><a class="dropdown-item" href="#">2022</a></li>
-                                    <li><a class="dropdown-item" href="#">2023</a></li>
-                                    <li><a class="dropdown-item" href="#">2024</a></li>
-                                    <li><a class="dropdown-item" href="#">2025</a></li>
-                                    <li><a class="dropdown-item" href="#">2026</a></li>
-                                    <li><a class="dropdown-item" href="#">2027</a></li>
-                                    <li><a class="dropdown-item" href="#">2028</a></li>
-                                    <li><a class="dropdown-item" href="#">2029</a></li>
+                                    @php
+                                        $current_year = date('Y');
+                                        $startYear = date('Y') - 10;
+                                        @endphp
+                                        @for ($i = $startYear; $i <= $current_year; $i++)<li><a id="year_select" class="dropdown-item" data-value="{{ $i }}" href="#">{{ $i }}</a></li>
+                                    @endfor
                                 </ul>
                             </div>
                         </div>
