@@ -17,9 +17,9 @@ The front end is built on **[Argon Dashboard 2 Laravel Template](https://www.cre
 + PRs are always welcome to improve exisiting system.
 
 ## Demo
-| Register | Login | Dashboard |
-| --- | --- | ---  |
-| [<img src="src/argon-stubs/resources/argon/screens/register.png" width="322" />](https://argon-dashboard-laravel.creative-tim.com/register) | [<img src="src/argon-stubs/resources/argon/screens/login.png" width="322" />](https://argon-dashboard-laravel.creative-tim.com/login)  | [<img src="src/argon-stubs/resources/argon/screens/dashboard.png" width="322" />](https://argon-dashboard-laravel.creative-tim.com/dashboard)
+| Dashboard |
+| --- |
+| [<img src="resources/personalized/screen/dashboard.png" width="322" />] |
 
 ## Setup
 With the above notes in mind, Windows setup is not too tricky:
