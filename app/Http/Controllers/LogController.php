@@ -43,7 +43,7 @@ class LogController extends Controller
 			// change issue date and return date in human readable format
 			$logs[$i]['issued_at'] = date('d-M', strtotime($logs[$i]['issued_at']));
 			if ($issue->return_time == 0) {
-				$logs[$i]['return_time'] =  '<p class="color:red">Pending</p>';
+				$logs[$i]['return_time'] =  'Pending';
 			}else {
 				$logs[$i]['return_time'] = date('d-M', strtotime($logs[$i]['return_time']));
 			}

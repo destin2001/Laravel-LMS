@@ -1,13 +1,12 @@
 function loadResults(){
-    var url = "/student/create?branch=" + $('#branch_select').val();
+    var url = "/student/create?branch=" + $('#dropdownMenuButton_branch').data('value');
    
-    if($('#year_select').val() != 0){
-        url += "&year=" + $('#year_select').val();
-        // alert(url);
+    if($('#dropdownMenuButton_year').val() != 0){
+        url += "&year=" + $('#dropdownMenuButton_year').data('value');
     }
 
-    if($('#category_select').val() != 0){
-        url += "&category=" + $('#category_select').val();
+    if($('#dropdownMenuButton_student_category').val() != 0){
+        url += "&category=" + $('#dropdownMenuButton_student_category').data('value');
     }
 
     var table = $('#students-table');
@@ -19,10 +18,11 @@ function loadResults(){
         success : function(data){
             console.log(data);
             if($.isEmptyObject(data)){
-                table.html('<tr><td class="align-middle text-lg px-4 py-3"><span class="badge badge-pill badge-lg bg-gradient-danger">No Students for these filters</span></td></tr>');
+                table.html('<tr><td colspan="8" class="align-middle text-center text-lg px-4 py-3"><span class="badge badge-pill badge-lg bg-gradient-danger">No students for these filters</span></td></tr>');
             } else {
                 table.html('');
                 for (var student in data) {
+                    console.log(data[student]);
                     table.append(default_tpl(data[student]));
                 }
             }
@@ -37,16 +37,52 @@ function loadResults(){
 }
 
 $(document).ready(function(){
-    $("#branch_select").change(function(){
+    $('.branch').click(function(e) {
+        e.preventDefault();
+
+        var value = $(this).data('value');
+        var text = $(this).text();
+
+        $('#dropdownMenuButton_branch').text(text);
+        $('#dropdownMenuButton_branch').data('value', value);
+
         loadResults();
+        $('#dropdownMenuButton_student_category').text('All Categories');
+        $('#dropdownMenuButton_student_category').data('value', null);
+        $('#dropdownMenuButton_year').text('All Years');
+        $('#dropdownMenuButton_year').data('value', null);
     });
 
-    $("#category_select").change(function(){
+    $('.student_category').click(function(e) {
+        e.preventDefault();
+
+        var value = $(this).data('value');
+        var text = $(this).text();
+
+        $('#dropdownMenuButton_student_category').text(text);
+        $('#dropdownMenuButton_student_category').data('value', value);
+
         loadResults();
+        $('#dropdownMenuButton_branch').text('All Branches');
+        $('#dropdownMenuButton_branch').data('value', null);
+        $('#dropdownMenuButton_year').text('All Years');
+        $('#dropdownMenuButton_year').data('value', null);
     });
 
-    $("#year_select").change(function(){
+    $('.year').click(function(e) {
+        e.preventDefault();
+
+        var value = $(this).data('value');
+        var text = $(this).text();
+
+        $('#dropdownMenuButton_year').text(text);
+        $('#dropdownMenuButton_year').data('value', value);
+
         loadResults();
+        $('#dropdownMenuButton_branch').text('All Branches');
+        $('#dropdownMenuButton_branch').data('value', null);
+        $('#dropdownMenuButton_student_category').text('All Categories');
+        $('#dropdownMenuButton_student_category').data('value', null);
     });
     
     loadResults();

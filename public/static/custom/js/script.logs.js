@@ -10,7 +10,7 @@ function loadResults(){
         success : function(data){
             console.log(data);
             if($.isEmptyObject(data)){
-                table.html('<tr><td class="align-middle text-lg px-4 py-3"><span class="badge badge-pill badge-lg bg-gradient-danger">There are no logs in database</span></td></tr>');
+                table.html('<tr><td colspan="7" class="align-middle text-center text-lg px-4 py-3"><span class="badge badge-pill badge-lg bg-gradient-danger">There are no logs in database</span></td></tr>');
             } else {
                 table.html('');
                 // console.log(JSON.stringify(data));
@@ -45,7 +45,12 @@ function issueBook(bookID, studentID, selectedForm){
         },
         url : url,
         success: function(data) {
-            selectedForm.prepend(templates.alert_box( {type: 'success', message: data} ));
+            //selectedForm.prepend(templates.alert_box( {type: 'success', message: data} ));
+            swal("Your book has been issued!", {
+                buttons: false,
+                icon: "success",
+                timer: 2000
+              });  
             ClearIssueBook();
             $('#issue_student_id').focus();
         },
@@ -54,7 +59,7 @@ function issueBook(bookID, studentID, selectedForm){
             console.log(xhr);
 
             var err = jQuery.parseJSON(xhr.responseText).error;
-            selectedForm.prepend(templates.alert_box( {type: 'danger', message: err.message} ));
+            //selectedForm.prepend(templates.alert_box( {type: 'danger', message: err.message} ));
         },
         beforeSend: function() {
             selectedForm.css({'opacity' : '0.4'});
@@ -72,14 +77,19 @@ function returnBook(bookID, selectedForm){
         
         url : url,
         success: function(data) {
-            selectedForm.prepend(templates.alert_box( {type: 'success', message: data} ));
+            // selectedForm.prepend(templates.alert_box( {type: 'success', message: data} ));
+            swal("Your book has been returned!", {
+                buttons: false,
+                icon: "success",
+                timer: 2000
+              });  
             ClearReturn();
             $('#return_book_id').focus();
 
         },
         error: function(xhr, status, error){
             var err = jQuery.parseJSON(xhr.responseText).error;
-            selectedForm.prepend(templates.alert_box( {type: 'danger', message: err.message} ));
+            // selectedForm.prepend(templates.alert_box( {type: 'danger', message: err.message} ));
         },
         beforeSend: function() {
             selectedForm.css({'opacity' : '0.4'});
@@ -101,11 +111,33 @@ function ClearIssueBook(){
 
 
 $(document).ready(function(){
+
     $(document).on("click","#issuebook",function(){
         var selectedForm = $(this).parents('form'),
             studentID = selectedForm.find("input[data-form-field~=student-issue-id]").val(),
-            bookID = selectedForm.find("input[data-form-field~=book-issue-id]").val();
-        
+            bookID = selectedForm.find("input[data-form-field~=book-issue-id]").val(),
+            inputs = [
+                document.getElementById("issue_student_id"),
+                document.getElementById("issue_book_id"),
+            ];
+
+            inputs.forEach(function(input) {
+                if (input.value == '' || input.value == null) {
+                    send_flag = false;
+                    input.classList.add("shake");
+                    input.style.borderColor = "red";
+                    
+                    setTimeout(function() {
+                        input.classList.remove("shake");
+                        input.style.borderColor = "";
+                    }, 1000);
+                } else {
+                    // Remove shake class from valid input field
+                    input.classList.remove("shake");
+                    input.style.borderColor = "";
+                }
+            });
+
         if(studentID == "" || bookID == ""){
             selectedForm.prepend(templates.alert_box( {type: 'danger', message: "Invalid Data"} ));
         } else {
@@ -115,10 +147,17 @@ $(document).ready(function(){
 
     $(document).on("click","#returnbook",function(){
         var selectedForm = $(this).parents('form'),
-            bookID = selectedForm.find("input[data-form-field~=book-issue-id]").val();
+        input = document.getElementById("return_book_id"),
+        bookID = selectedForm.find("input[data-form-field~=book-issue-id]").val();
         
         if(bookID == ""){
-            selectedForm.prepend(templates.alert_box( {type: 'danger', message: "Invalid Data"} ));
+            input.classList.add("shake");
+            input.style.borderColor = "red";
+            setTimeout(function() {
+                input.classList.remove("shake");
+                input.style.borderColor = "";
+            }, 1000);
+            selectedForm.prepend(templates.alert_box( {type: 'danger', message: "Please Enter Book ID"} ));
         } else {
             returnBook(bookID, selectedForm);
         }

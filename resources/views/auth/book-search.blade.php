@@ -1,19 +1,11 @@
 @extends('layouts.app')
-
 @section('content')
 @include('layouts.navbars.guest.navbar')
-<main class="main-content  mt-0">
-	<div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signup-cover.jpg'); background-position: top;">
-		<span class="mask bg-gradient-dark opacity-6"></span>
-		<div class="container">
-			<div class="row justify-content-center">
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
-			<div class="col-xl-9 col-lg-10 col-md-7 mx-auto">
-				<div class="card z-index-0">
+<main class="main-content mt-10">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-9 mx-auto">
+				<div class="card card-blur z-index-0">
 					<div class="card-header pb-0">
 						<form class="form-horizontal row-fluid">
 							<h6>NAME OR AUTHOR OF THE BOOK</h6>
@@ -61,14 +53,11 @@
 				</div>
 			</div>
 		</div>
+	</div>
 </main>
-@include('layouts.footers.guest.footer')
 @endsection
 
 @push('js')
-<script type="text/javascript">
-	var categories_list = $('#categories_list').val();
-</script>
 <script src="{{asset('static/scripts/jquery-1.9.1.min.js') }}" type="text/javascript"></script>
 <script src="{{asset('static/scripts/jquery-ui-1.10.1.custom.min.js') }}" type="text/javascript"></script>
 <script src="{{asset('static/scripts/underscore-min.js') }}" type="text/javascript"></script>
@@ -80,3 +69,7 @@
 	@include('under_source.search_book')
 </script>
 @endpush
+
+<!-- <div class="col-xl-6 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+
+</div> -->

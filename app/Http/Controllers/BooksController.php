@@ -32,7 +32,7 @@ class BooksController extends Controller
 	public function index()
 	{
 
-		$book_list = Books::select('book_id', 'title', 'author', 'description', 'book_categories.category')
+		$book_list = Books::select('book_id', 'title', 'author', 'publisher', 'publish_year', 'description', 'book_categories.category')
 			->join('book_categories', 'book_categories.id', '=', 'books.category_id')
 			->orderBy('book_id')->get();
 		// dd($book_list);
@@ -168,7 +168,7 @@ class BooksController extends Controller
 	 */
 	public function show($string)
 	{
-		$book_list = Books::select('book_id', 'title', 'author', 'description', 'book_categories.category')
+		$book_list = Books::select('book_id', 'title', 'author', 'description', 'publisher', 'publish_year', 'book_categories.category')
 			->join('book_categories', 'book_categories.id', '=', 'books.category_id')
 			->where('title', 'like', '%' . $string . '%')
 			->orWhere('author', 'like', '%' . $string . '%')

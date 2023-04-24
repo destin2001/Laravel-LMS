@@ -24,6 +24,21 @@
 
 <body class="{{ $class ?? '' }}">
 
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
     @guest
     @yield('content')
     @endguest
@@ -47,6 +62,7 @@
     @endif
     @endauth
 
+    @stack('js');
     <!--   Core JS Files   -->
     <script src="assets/js/core/popper.min.js"></script>
     <script src="assets/js/core/bootstrap.min.js"></script>
@@ -69,7 +85,6 @@
     <script type="text/template" id="alert_box">
         @include('under_source.alert_box')
     </script>
-    @stack('js');
 </body>
 
 </html>

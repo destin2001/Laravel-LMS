@@ -1,12 +1,12 @@
 function loadResults(){
-    var url =  "/student?branch=" + $('#branch_select').val();
+    var url =  "/student?branch=" + $('#dropdownMenuButton_branch').data('value');
 
-    if($('#year_select').val() != 0){
-        url += "&year=" + $('#year_select').val();
+    if($('#dropdownMenuButton_year').val() != 0){
+        url += "&year=" + $('#dropdownMenuButton_year').data('value');
     }
 
-    if($('#category_select').val() != 0){
-        url += "&category=" + $('#category_select').val();
+    if($('#dropdownMenuButton_student_category').val() != 0){
+        url += "&category=" + $('#dropdownMenuButton_student_category').data('value');
     }
 
     var table = $('#approval-table');
@@ -17,7 +17,8 @@ function loadResults(){
         url : url,
         success : function(data){
             if($.isEmptyObject(data)){
-                table.html('<tr><td class="align-middle text-lg px-4 py-3"><span class="badge badge-pill badge-lg bg-gradient-danger">No Students for approval for these filters</span></td></tr>');
+                console.log(data);
+                table.html('<tr><td colspan="8" class="align-middle text-center text-lg px-4 py-3"><span class="badge badge-pill badge-lg bg-gradient-danger">No Students for approval for these filters</span></td></tr>');
             } else {
                 table.html('');
                 for (var student in data) {
@@ -37,7 +38,7 @@ function loadResults(){
 function StudentByBranch(){
     var url =  "/studentByattribute/";
 
-    var branch  = $('#branch_select').val()
+    var branch  = $('#dropdownMenuButton_branch').data('value');
     var _token = $('#_token').val();
     var table = $('#approval-table');
     
@@ -53,7 +54,7 @@ function StudentByBranch(){
         url : url,
         success : function(data){
             if($.isEmptyObject(data)){
-                table.html('<tr><td colspan="99">No Students for approval for these filters</td></tr>');
+                table.html('<tr><td colspan="8" class="align-middle text-center text-lg px-4 py-3"><span class="badge badge-pill badge-lg bg-gradient-danger">No Students for approval for these filters</span></td></tr>');
             } else {
                 table.html('');
                 for (var student in data) {
@@ -73,7 +74,7 @@ function StudentByBranch(){
 function StudentByCategory(){
     var url =  "/studentByattribute/";
 
-    var category  = $('#category_select').val()
+    var category  = $('#dropdownMenuButton_student_category').data('value');
     var _token = $('#_token').val();
     var table = $('#approval-table');
     
@@ -89,7 +90,7 @@ function StudentByCategory(){
         url : url,
         success : function(data){
             if($.isEmptyObject(data)){
-                table.html('<tr><td colspan="99">No Students for approval for these filters</td></tr>');
+                table.html('<tr><td colspan="8" class="align-middle text-center text-lg px-4 py-3"><span class="badge badge-pill badge-lg bg-gradient-danger">No Students for approval for these filters</span></td></tr>');
             } else {
                 table.html('');
                 for (var student in data) {
@@ -107,18 +108,23 @@ function StudentByCategory(){
 }
 
 $('#refresh').on('click', function(){
-    $('#branch_select').val(0);
-    $('#category_select').val(0);
-    $('#year_select').val(0);
+    $('#dropdownMenuButton_branch').text('All Branches');
+    $('#dropdownMenuButton_branch').data('value', null);
+    $('#dropdownMenuButton_student_category').text('All Categories');
+    $('#dropdownMenuButton_student_category').data('value', null);
+    $('#dropdownMenuButton_year').text('All Years');
+    $('#dropdownMenuButton_year').data('value', null);
     loadResults();
 })
 
 function StudentByYear(){
     var url =  "/studentByattribute/";
 
-    var year  = $('#year_select').val()
+    var year  = $('#dropdownMenuButton_year').data('value');
     var _token = $('#_token').val();
     var table = $('#approval-table');
+
+    console.log(year);
     
     var default_tpl = _.template($('#approvalstudents_show').html());
 
@@ -132,7 +138,7 @@ function StudentByYear(){
         url : url,
         success : function(data){
             if($.isEmptyObject(data)){
-                table.html('<tr><td colspan="99">No Students for approval for these filters</td></tr>');
+                table.html('<tr><td colspan="8" class="align-middle text-center text-lg px-4 py-3"><span class="badge badge-pill badge-lg bg-gradient-danger">No Students for approval for these filters</span></td></tr>');
             } else {
                 table.html('');
                 for (var student in data) {
@@ -150,9 +156,8 @@ function StudentByYear(){
 }
 
 
-function approveStudent(studentID, flag, btn) {
-    var module_body = btn.parents('.module-body'),
-        table = $('#approval-table');
+function approveStudent(studentID, flag) {
+    table = $('#approval-table');
 
     console.log(flag);
 
@@ -165,11 +170,23 @@ function approveStudent(studentID, flag, btn) {
         },
         url : '/student/' + studentID,
         success: function(data) {
-            module_body.prepend(templates.alert_box( {type: 'success', message: data} ));
+            console.log(data.flag);
+            if (data.flag == 0) {
+                swal("Student reject has been successful!", {
+                    icon: "error",
+                    buttons: false,
+                    timer: 2000
+                });      
+            } swal("Student approve has been successful!", {
+                buttons: false,
+                icon: "success",
+                timer: 2000
+            });
+               
             loadResults();
         },
         error: function(xhr, msg){
-            module_body.prepend(templates.alert_box( {type: 'danger', message: msg} ));     
+            swal("Oops!", xhr.responseText, "error");
         },
         beforeSend: function() {
             table.css({'opacity' : '0.4'});
@@ -182,22 +199,52 @@ function approveStudent(studentID, flag, btn) {
 
 $(document).ready(function(){
 
-    $("#branch_select").change(function(){
+    $('.branch').click(function(e) {
+        e.preventDefault();
+
+        var value = $(this).data('value');
+        var text = $(this).text();
+
+        $('#dropdownMenuButton_branch').text(text);
+        $('#dropdownMenuButton_branch').data('value', value);
+
         StudentByBranch();
-        $('#category_select').val(0);
-        $('#year_select').val(0);
+        $('#dropdownMenuButton_student_category').text('All Categories');
+        $('#dropdownMenuButton_student_category').data('value', null);
+        $('#dropdownMenuButton_year').text('All Years');
+        $('#dropdownMenuButton_year').data('value', null);
     });
 
-    $("#category_select").change(function(){
+    $('.student_category').click(function(e) {
+        e.preventDefault();
+
+        var value = $(this).data('value');
+        var text = $(this).text();
+
+        $('#dropdownMenuButton_student_category').text(text);
+        $('#dropdownMenuButton_student_category').data('value', value);
+
         StudentByCategory();
-        $('#branch_select').val(0)
-        $('#year_select').val(0);
+        $('#dropdownMenuButton_branch').text('All Branches');
+        $('#dropdownMenuButton_branch').data('value', null);
+        $('#dropdownMenuButton_year').text('All Years');
+        $('#dropdownMenuButton_year').data('value', null);
     });
 
-    $("#year_select").change(function(){
-        StudentByYear();
-        $('#branch_select').val(0)
-        $('#category_select').val(0);
+    $('.year').click(function(e) {
+        e.preventDefault();
+
+        var value = $(this).data('value');
+        var text = $(this).text();
+
+        $('#dropdownMenuButton_year').text(text);
+        $('#dropdownMenuButton_year').data('value', value);
+
+        StudentByCategory();
+        $('#dropdownMenuButton_branch').text('All Branches');
+        $('#dropdownMenuButton_branch').data('value', null);
+        $('#dropdownMenuButton_student_category').text('All Categories');
+        $('#dropdownMenuButton_student_category').data('value', null);
     });
 
     $(document).on("click",".student-status",function(){
@@ -208,7 +255,7 @@ $(document).ready(function(){
         console.log(studentID);
         console.log(flag);
         
-        approveStudent(studentID, flag, $(this));
+        approveStudent(studentID, flag);
     });
     
     loadResults();

@@ -17,14 +17,15 @@ function loadResults(string){
                 table.html('');
                 for(var books in data) {
                     book = data[books];
-
                     if(book.avaliability){
-                        book.avaliability = '<a class="btn btn-success">Available</a>';
+                        book.avaliability = 'Available';
+                        type = 'success';
                     } else {
-                        book.avaliability = '<a class="btn btn-danger">Not Available</a>';
+                        book.avaliability = 'Not Available';
+                        type = 'danger';
                     }
-                    
-                    table.append(default_tpl(book));
+                    console.log(book);
+                    table.append(default_tpl(book, type));
                 }
             }
         },

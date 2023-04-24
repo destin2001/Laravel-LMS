@@ -25,7 +25,7 @@ student_year = student_year;
  */
 %>
 
-<tr data-student-id="<%= obj.student_id %>">
+<!-- <tr data-student-id="<%= obj.student_id %>">
 	<td><%= obj.student_id %></td>
 	<td><%= obj.first_name %></td>
 	<td><%= obj.last_name %></td>
@@ -36,4 +36,31 @@ student_year = student_year;
 		<a class="btn btn-success student-status" data-status="1">Approve</a>
 		<a class="btn btn-danger student-status" data-status="0">Reject</a>
 	</td>
+</tr> -->
+
+<tr data-student-id="<%= obj.student_id %>">
+    <td class="align-middle text-center">
+        <div class="d-flex flex-column justify-content-center">
+            <p class="text-xs text-secondary mb-0"><%= obj.student_id %></p>
+        </div>
+    </td>
+    <td class="align-middle text-start">
+        <span class="text-secondary text-sm font-weight-bold"><%= obj.first_name %></span>
+    </td>
+    <td class="align-middle text-center">
+        <span class="text-secondary text-sm font-weight-bold"><%= obj.last_name %></span>
+    </td>
+    <td class="align-middle text-center">
+        <span class="text-secondary text-sm font-weight-bold"><%= obj.roll_num %>/<%= obj.branch %>/<%= student_year %></span>
+    </td>
+    <td class="align-middle text-center">
+        <span class="text-secondary text-sm font-weight-bold"><%= obj.branch %></span>
+    </td>
+    <td class="align-middle text-center text-sm">
+        <span class="text-secondary text-sm font-weight-bold"><%= obj.category %></span>
+    </td>
+    <td class="align-middle text-center text-sm">
+		<a class="btn bg-gradient-success student-status my-2" data-status="1">Approve</a>
+		<a class="btn bg-gradient-danger student-status my-2" data-status="0">Reject</a>
+    </td>
 </tr>

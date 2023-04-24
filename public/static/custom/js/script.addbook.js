@@ -8,7 +8,7 @@ function loadResults() {
     success: function(data) {
       console.log(data);
       if ($.isEmptyObject(data)) {
-        table.html('<tr><td class="align-middle text-lg px-4 py-3"><span class="badge badge-pill badge-lg bg-gradient-danger">There are no books in this category</span></td></tr>');
+        table.html('<tr><td colspan="7" class="align-middle text-center text-lg px-4 py-3"><span class="badge badge-pill badge-lg bg-gradient-danger">There are no books in this category</span></td></tr>');
     } else {
         table.html('');
         for (var book in data) {
@@ -119,7 +119,9 @@ $(document).on("click","#addbooks",function(event){
                 url : '/books',
                 success: function(data) {        
                     swal("Your book has been created!", {
+                        buttons: false,
                         icon: "success",
+                        timer: 2000
                       });            
                     // module_body.prepend(templates.alert_box( {type: 'success', message: data} ));
                     clearform();
@@ -147,8 +149,7 @@ function clearform(){
     $('#title').val('');
     $('#author').val('');
     $('#publisher').val('');
-    $('#publish_year').val('');
     $('#description').val('');
     $('#number').val('');
-    $('#category').val('');
-}
+    $('#choices-button1').val('');
+    $('#choices-button2').val('');}

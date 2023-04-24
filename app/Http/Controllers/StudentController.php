@@ -57,7 +57,6 @@ class StudentController extends Controller
 				->orderBy('student_id');
 			$students = $students->get();
 			return $students;
-		
 		}
 
 		elseif ($request->category != 0) {

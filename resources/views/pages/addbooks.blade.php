@@ -43,8 +43,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Published Year</label>
-                                    <select tabindex="1" class="form-control" name="choices-button" data-form-field="publish_year" id="choices-button publish_year" placeholder="Departure" data-placeholder="Select publish year..">
-                                        <!-- <option value="0">All Years</option> -->
+                                    <select tabindex="1" class="form-control" name="choices-button" data-form-field="publish_year" id="choices-button1" placeholder="Departure" data-placeholder="Select publish year..">
+                                        <option value="0">Select Year</option>
                                         @php
                                         $current_year = date('Y');
                                         $startYear = date('Y') - 10;
@@ -66,7 +66,8 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Category</label>
-                                    <select tabindex="1" class="form-control" name="choices-button" data-form-field="category" id="choices-button category" placeholder="Departure" data-placeholder="Select category..">
+                                    <select tabindex="1" class="form-control" name="choices-button" data-form-field="category" id="choices-button2" placeholder="Departure" data-placeholder="Select category..">
+                                        <option value="0">Select Category</option>
                                         @foreach($categories_list as $category)
                                         <option value="{{ $category->id }}">{{ $category->category }}</option>
                                         @endforeach
